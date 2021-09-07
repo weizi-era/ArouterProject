@@ -1,0 +1,5 @@
+rootProject.name = "ArouterProject"
+include ':app'
+include ':arouter-annotation'
+include ':arouter-compiler'
+include ':arouter-api'

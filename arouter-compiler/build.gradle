@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+
+    // 背后的服务  google 的 auto-service
+    implementation 'com.google.auto.service:auto-service:1.0-rc4'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
+
+    // 依赖注解
+    implementation project(":arouter-annotation")
+
+    // JavaPoet依赖
+    implementation 'com.squareup:javapoet:1.11.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
