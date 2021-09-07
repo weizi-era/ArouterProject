@@ -11,12 +11,19 @@ ARouter 组件化路由
 JavaPoet是一种OOP思想，面向对象编程，一切以对象为中心
 
 倒序生成
+
 1.方法
+
 2.类
+
 3.包
 
 TypeSpec  生成类
+
 MethodSpec  生成方法
+
 ParameterSpec  生成参数
+
 AnnotationSpec 生成注解
+
 JavaFile  生成java文件
