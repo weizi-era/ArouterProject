@@ -20,6 +20,8 @@
     <bytecodeTargetLevel target="1.7">
       <module name="ArouterProject.app" target="1.8" />
       <module name="ArouterProject.arouter-api" target="1.8" />
+      <module name="ArouterProject.order" target="1.8" />
+      <module name="ArouterProject.personal" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

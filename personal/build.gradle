@@ -1,5 +1,7 @@
-plugins {
-    id 'com.android.application'
+if (isRelease) {
+    apply plugin : "com.android.library"
+} else {
+    apply plugin : "com.android.application"
 }
 
 android {
@@ -7,7 +9,10 @@ android {
     buildToolsVersion app_android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.example.arouterproject"
+        if (!isRelease) {
+            applicationId app_appid.personal
+        }
+
         minSdkVersion app_android.minSdkVersion
         targetSdkVersion app_android.targetSdkVersion
         versionCode app_android.versionCode
@@ -19,7 +24,6 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                // project.getName() == app
                 arguments = [moduleName: project.getName(), packageNameForAPT: packageNameForAPT]
             }
         }
@@ -42,7 +46,6 @@ dependencies {
     app_dependencies.each {
         k,v -> implementation v
     }
-
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -52,14 +55,4 @@ dependencies {
 
     // 依赖注解处理器  才能工作
     annotationProcessor project(":arouter-compiler")
-
-    if (isRelease) {
-        // 进if，集成，融为一体（order，personal）
-
-        // 订单模块
-        implementation project(":order")
-
-        // 个人中心模块
-        implementation project(":personal")
-    }
 }
