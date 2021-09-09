@@ -5,7 +5,8 @@ import javax.lang.model.element.Element;
 public class ARouterBean {
 
     public enum TypeEnum {
-        ACTIVITY
+        ACTIVITY,
+        CALL
     }
 
     private TypeEnum typeEnum;  // 枚举类型：activity

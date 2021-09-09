@@ -98,9 +98,12 @@ public class ParameterProcessor extends AbstractProcessor {
                     // 是activity
                     ClassName className = ClassName.get(typeElement);
 
+                    // 方法生成
                     ParameterFactory factory = new ParameterFactory.Builder(parameterSpec)
                             .setClassName(className)
                             .setMessager(messager)
+                            .setElements(elementUtils)
+                            .setTypes(typeUtils)
                             .build();
 
                     factory.addFirstStatement();

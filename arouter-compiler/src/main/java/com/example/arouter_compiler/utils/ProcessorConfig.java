@@ -56,5 +56,9 @@ public interface ProcessorConfig {
 
     String PARAMETER_METHOD_NAME = "getParameter";
 
+    // Call 的 包名 + 接口名
+    String CALL_API_NAME = AROUTER_API_PACKAGE + ".Call";
 
+    // ARouter Manager 的包名 + 类名
+    String AROUTER_MANAGER = "ARouterManager";
 }

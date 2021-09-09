@@ -40,6 +40,8 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
+import jdk.vm.ci.code.site.Call;
+
 @AutoService(Processor.class)  // 启动服务
 @SupportedAnnotationTypes({ProcessorConfig.AROUTER_PACKAGE})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -114,6 +116,11 @@ public class ARouterProcessor extends AbstractProcessor {
         if (annotations.isEmpty()) {
             return false;
         }
+
+        // todo Call
+        TypeElement callType = elementTool.getTypeElement(ProcessorConfig.CALL_API_NAME);
+        TypeMirror callMirror = callType.asType();  // 自描述
+
 
         // 获取所有被 @ARouter 注解的 元素集合
         Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(ARouter.class);
@@ -245,6 +252,8 @@ public class ARouterProcessor extends AbstractProcessor {
             TypeMirror typeMirror = element.asType();
             if (typesTool.isSubtype(typeMirror, activityMirror)) {
                 aRouterBean.setTypeEnum(ARouterBean.TypeEnum.ACTIVITY);
+            } else if (typesTool.isSubtype(typeMirror, callMirror)) {
+                aRouterBean.setTypeEnum(ARouterBean.TypeEnum.CALL);
             } else {
                 // 不匹配抛出异常，这里谨慎使用！考虑维护问题
                 throw new RuntimeException("@ARouter注解目前仅限用于Activity类之上");

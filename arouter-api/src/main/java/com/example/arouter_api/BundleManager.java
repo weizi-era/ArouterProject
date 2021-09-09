@@ -35,8 +35,8 @@ public class BundleManager {
     }
 
     // 直接完成跳转
-    public void navigation(Context context) {
-        ARouterManager.getInstance().navigation(context, this);
+    public Object navigation(Context context) {
+       return ARouterManager.getInstance().navigation(context, this);
     }
 
 }

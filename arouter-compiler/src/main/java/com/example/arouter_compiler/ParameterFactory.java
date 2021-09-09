@@ -6,12 +6,16 @@ import com.example.arouter_compiler.utils.ProcessorUtils;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
+import com.squareup.javapoet.TypeName;
 
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
 /**
@@ -33,14 +37,26 @@ public class ParameterFactory {
 
      private Messager messager;
 
+     private Types typeUtils;
+
+     private Elements elementUtils;
+
+     private TypeMirror callMirror;
+
      private ParameterFactory(Builder builder) {
         this.className = builder.className;
         this.messager = builder.messager;
+        this.typeUtils = builder.typeUtils;
 
         method = MethodSpec.methodBuilder(ProcessorConfig.PARAMETER_METHOD_NAME)
                 .addAnnotation(Override.class)
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(builder.parameterSpec);
+
+        // call 自描述
+        this.callMirror = builder.elementUtils
+                .getTypeElement(ProcessorConfig.CALL_API_NAME)
+                .asType();
      }
 
      public void addFirstStatement() {
@@ -81,6 +97,15 @@ public class ParameterFactory {
              if (typeMirror.toString().equalsIgnoreCase(ProcessorConfig.STRING_PACKAGE)) {
                  // String类型
                  methodContent += "getStringExtra($S)";
+             } else if (typeUtils.isSubtype(typeMirror, callMirror)) {
+                 methodContent = "t." + fieldName + " = ($T) $T.getInstance().build($S).navigation(t)";
+
+                 method.addStatement(methodContent,
+                         TypeName.get(typeMirror),
+                         ClassName.get(ProcessorConfig.AROUTER_API_PACKAGE, ProcessorConfig.AROUTER_MANAGER),
+                         annotationValue);
+
+                 return;
              }
          }
 
@@ -98,6 +123,20 @@ public class ParameterFactory {
          private ClassName className;
 
          private Messager messager;
+
+         private Elements elementUtils;
+
+         private Types typeUtils;
+
+         public Builder setElements(Elements elementUtils) {
+             this.elementUtils = elementUtils;
+             return this;
+         }
+
+         public Builder setTypes(Types typeUtils) {
+             this.typeUtils = typeUtils;
+             return this;
+         }
 
          public Builder(ParameterSpec parameterSpec) {
             this.parameterSpec = parameterSpec;

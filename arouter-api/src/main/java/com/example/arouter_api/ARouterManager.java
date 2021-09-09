@@ -57,7 +57,7 @@ public class ARouterManager {
         return new BundleManager();
     }
 
-    public void navigation(Context context, BundleManager bundleManager) {
+    public Object navigation(Context context, BundleManager bundleManager) {
 
         String groupClassName = context.getPackageName() + "." + FILE_GROUP_NAME + group;
 
@@ -108,6 +108,8 @@ public class ARouterManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return null;
 
     }
 }
