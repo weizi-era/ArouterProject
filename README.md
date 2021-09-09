@@ -30,6 +30,7 @@ JavaFile  生成java文件
 
 最终生成的Group文件：
 
+```java
 public class ARouter$$Group$$personal implements ARouterGroup {
   @Override
   public Map<String, Class<? extends ARouterPath>> getGroupMap() {
@@ -38,9 +39,11 @@ public class ARouter$$Group$$personal implements ARouterGroup {
     return groupMap;
   }
 }
+```
 
 最终生成的Path文件：
 
+```java
 public class ARouter$$Path$$personal implements ARouterPath {
   @Override
   public Map<String, RouterBean> getPathMap() {
@@ -50,3 +53,4 @@ public class ARouter$$Path$$personal implements ARouterPath {
     return pathMap;
   }
 }
+```
