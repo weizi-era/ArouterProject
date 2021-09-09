@@ -48,7 +48,7 @@ public class ARouter$$Path$$personal implements ARouterPath {
   @Override
   public Map<String, RouterBean> getPathMap() {
     Map<String, RouterBean> pathMap = new HashMap<>();
-    pathMap.put("/personal/Personal_Main2Activity", RouterBean.create();
+    pathMap.put("/personal/Personal_Main2Activity", RouterBean.create());
     pathMap.put("/personal/Personal_MainActivity", RouterBean.create());
     return pathMap;
   }
