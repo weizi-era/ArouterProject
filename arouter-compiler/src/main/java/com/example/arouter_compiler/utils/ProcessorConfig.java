@@ -5,6 +5,9 @@ public interface ProcessorConfig {
     // @ARouter注解 的 包名 + 类名
     String AROUTER_PACKAGE =  "com.example.arouter_annotation.ARouter";
 
+    // @Parameter注解 的包名 + 类名
+    String PARAMETER_PACKAGE = "com.example.arouter_annotation.Parameter";
+
     // 接收参数的TAG标记
     String OPTIONS = "moduleName"; // 目的是接收 每个module名称
     String APT_PACKAGE = "packageNameForAPT"; // 目的是接收 包名（APT 存放的包名）
@@ -24,6 +27,12 @@ public interface ProcessorConfig {
     // ARouter api 的 ARouterPath 高层标准
     String AROUTER_API_PATH = AROUTER_API_PACKAGE + ".ARouterPath";
 
+    // Parameter api 的 ParameterGet 高层标准
+    String PARAMETER_API_GET = AROUTER_API_PACKAGE + ".ParameterGet";
+
+    // ParameterGet 方法参数名字
+    String PARAMETER_NAME = "targetParameter";
+
     // 路由组，中的 Path 里面的 方法名
     String PATH_METHOD_NAME = "getPathMap";
 
@@ -41,4 +50,11 @@ public interface ProcessorConfig {
 
     // 路由组，GROUP 最终要生成的 文件名
     String GROUP_FILE_NAME = "ARouter$$Group$$";
+
+    // Parameter 最终要生成的 文件名
+    String PARAMETER_FILE_NAME = "$$Parameter";
+
+    String PARAMETER_METHOD_NAME = "getParameter";
+
+
 }
