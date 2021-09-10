@@ -8,11 +8,22 @@ import android.os.Bundle;
  */
 public class BundleManager {
 
+    private Call call;
+
     private Bundle bundle = new Bundle();
 
     public Bundle getBundle() {
         return bundle;
     }
+
+    public Call getCall() {
+        return call;
+    }
+
+    public void setCall(Call call) {
+        this.call = call;
+    }
+
 
     public BundleManager writeString(String key, String value) {
         bundle.putString(key, value);

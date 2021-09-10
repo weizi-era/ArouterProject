@@ -40,7 +40,6 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
-import jdk.vm.ci.code.site.Call;
 
 @AutoService(Processor.class)  // 启动服务
 @SupportedAnnotationTypes({ProcessorConfig.AROUTER_PACKAGE})

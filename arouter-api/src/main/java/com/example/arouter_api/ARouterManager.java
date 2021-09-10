@@ -100,9 +100,14 @@ public class ARouterManager {
                             intent.putExtras(bundleManager.getBundle());
                             context.startActivity(intent);
                             break;
+                        case CALL:
+                            Class<?> aClass = routerBean.getaClass();
+                            Call call = (Call) aClass.newInstance();
+                            bundleManager.setCall(call);
+                            return bundleManager.getCall();
+
                     }
                 }
-
             }
 
         } catch (Exception e) {

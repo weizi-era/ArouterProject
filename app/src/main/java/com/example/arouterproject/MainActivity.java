@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         int drawable = orderDrawable.getDrawable();
         ImageView imageView = findViewById(R.id.img);
         imageView.setImageResource(drawable);
+
     }
 
     public void jumpOrder(View view) {
