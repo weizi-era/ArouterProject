@@ -37,5 +37,6 @@ ext {
             "okhttp3"        : "com.squareup.okhttp3:okhttp:3.10.0",
             "retrofit"       : "com.squareup.retrofit2:retrofit:2.5.0",
             "fastjson"       : "com.alibaba:fastjson:1.2.58",
+            "permissionx"  : "com.guolindev.permissionx:permissionx:1.5.1"
     ]
 }

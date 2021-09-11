@@ -9,7 +9,11 @@ import android.widget.ImageView;
 import com.example.arouter_annotation.ARouter;
 import com.example.arouter_annotation.Parameter;
 import com.example.arouter_api.ParameterManager;
+import com.example.common.order.OrderAddress;
+import com.example.common.order.OrderBean;
 import com.example.common.order.OrderDrawable;
+
+import java.io.IOException;
 
 @ARouter(path = "/personal/Personal_MainActivity")
 public class Personal_MainActivity extends AppCompatActivity {
@@ -26,6 +30,9 @@ public class Personal_MainActivity extends AppCompatActivity {
     @Parameter
     int age = 9;
 
+    @Parameter(name = "/order/getOrderBean")
+    OrderAddress orderAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,18 @@ public class Personal_MainActivity extends AppCompatActivity {
         imageView.setImageResource(drawable);
 
         Log.d("TAG", "order传递的参数: name:" + name + ",sex:" + sex + ",age:" + age);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OrderBean orderBean = orderAddress.getOrderBean("aa205eeb45aa76c6afe3c52151b52160", "144.34.161.97");
+                    Log.d("TAG", "run: " + orderBean.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 }

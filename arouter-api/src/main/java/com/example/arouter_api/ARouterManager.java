@@ -101,7 +101,7 @@ public class ARouterManager {
                             context.startActivity(intent);
                             break;
                         case CALL:
-                            Class<?> aClass = routerBean.getaClass();
+                            Class<?> aClass = routerBean.getaClass();  //nadao shixian
                             Call call = (Call) aClass.newInstance();
                             bundleManager.setCall(call);
                             return bundleManager.getCall();

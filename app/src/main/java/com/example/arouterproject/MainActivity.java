@@ -1,17 +1,26 @@
 package com.example.arouterproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.arouter_annotation.ARouter;
 import com.example.arouter_annotation.Parameter;
 import com.example.arouter_api.ARouterManager;
 import com.example.arouter_api.ParameterManager;
 import com.example.common.order.OrderDrawable;
+import com.example.common.user.IUser;
+import com.permissionx.guolindev.PermissionX;
+import com.permissionx.guolindev.callback.RequestCallback;
+
+import java.util.List;
 
 @ARouter(path = "/app/MainActivity")
 public class MainActivity extends AppCompatActivity {
@@ -19,10 +28,26 @@ public class MainActivity extends AppCompatActivity {
     @Parameter(name = "/order/getDrawable")
     OrderDrawable orderDrawable;
 
+    @Parameter(name = "/order/getUserInfo")
+    IUser iUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PermissionX.init(this)
+                .permissions(Manifest.permission.INTERNET)
+                .request(new RequestCallback() {
+                    @Override
+                    public void onResult(boolean allGranted, @NonNull List<String> grantedList, @NonNull List<String> deniedList) {
+                        if (allGranted) {
+                            Toast.makeText(MainActivity.this, "All permissions are granted", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "These permissions are denied: " + deniedList, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
         ParameterManager.getInstance().loadParameter(this);
 
@@ -31,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.img);
         imageView.setImageResource(drawable);
 
+        Log.d("TAG", "order UserInfo ==: " + iUser.getUserInfo().toString());
     }
 
     public void jumpOrder(View view) {
@@ -40,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
                 .writeString("name", "王小二")
                 .writeString("sex", "男")
                 .writeInt("age", 28)
+                .navigation(this);
+    }
+
+    public void jumpPersonal(View view) {
+
+        ARouterManager.getInstance()
+                .build("/personal/Personal_MainActivity")
                 .navigation(this);
     }
 }
