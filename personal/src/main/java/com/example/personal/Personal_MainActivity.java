@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.example.arouter_annotation.ARouter;
 import com.example.arouter_annotation.Parameter;
 import com.example.arouter_api.ParameterManager;
+import com.example.common.bean.Student;
 import com.example.common.order.OrderAddress;
 import com.example.common.order.OrderBean;
 import com.example.common.order.OrderDrawable;
@@ -32,6 +33,9 @@ public class Personal_MainActivity extends AppCompatActivity {
 
     @Parameter(name = "/order/getOrderBean")
     OrderAddress orderAddress;
+
+    @Parameter
+    Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,10 @@ public class Personal_MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+        //输出Student
+
+        Log.d("TAG", "onCreate: Student == " + student.toString());
     }
 
 }

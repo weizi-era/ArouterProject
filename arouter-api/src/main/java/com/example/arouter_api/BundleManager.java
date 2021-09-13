@@ -3,6 +3,8 @@ package com.example.arouter_api;
 import android.content.Context;
 import android.os.Bundle;
 
+import java.io.Serializable;
+
 /**
  * 管理参数
  */
@@ -42,6 +44,11 @@ public class BundleManager {
 
     public BundleManager writeBundle(Bundle bundle) {
         this.bundle = bundle;
+        return this;
+    }
+
+    public BundleManager writeSerializable(String key, Serializable object) {
+        bundle.putSerializable(key, object);
         return this;
     }
 

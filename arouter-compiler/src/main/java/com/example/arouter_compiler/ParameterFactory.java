@@ -104,12 +104,15 @@ public class ParameterFactory {
                          TypeName.get(typeMirror),
                          ClassName.get(ProcessorConfig.AROUTER_API_PACKAGE, ProcessorConfig.AROUTER_MANAGER),
                          annotationValue);
-
                  return;
+             } else {  // 对象的传输
+                 methodContent = "t.getIntent().getSerializableExtra($S)";
              }
          }
 
-         if (methodContent.endsWith(")")) {
+         if (methodContent.contains("Serializable")) {
+             method.addStatement(finalValue + " = ($T) " + methodContent, ClassName.get(element.asType()), annotationValue);
+         } else if (methodContent.endsWith(")")) {
              method.addStatement(methodContent, annotationValue);
          } else {
              messager.printMessage(Diagnostic.Kind.ERROR, "目前暂支持String、int、boolean传参");

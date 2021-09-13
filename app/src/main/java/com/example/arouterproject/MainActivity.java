@@ -1,20 +1,20 @@
 package com.example.arouterproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.arouter_annotation.ARouter;
 import com.example.arouter_annotation.Parameter;
 import com.example.arouter_api.ARouterManager;
 import com.example.arouter_api.ParameterManager;
+import com.example.common.bean.Student;
 import com.example.common.order.OrderDrawable;
 import com.example.common.user.IUser;
 import com.permissionx.guolindev.PermissionX;
@@ -71,8 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void jumpPersonal(View view) {
 
+        Student student = new Student("zhaojiawei", "男", 28);
+
         ARouterManager.getInstance()
                 .build("/personal/Personal_MainActivity")
+                .writeSerializable("student", student)
                 .navigation(this);
     }
 }
